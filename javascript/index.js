@@ -1,4 +1,4 @@
-setInterval(function () {
+function updateTime() {
   //Brisbane
   let brisbaneElement = document.querySelector("#brisbane");
   let brisbaneDateElement = brisbaneElement.querySelector(".date");
@@ -9,10 +9,8 @@ setInterval(function () {
   brisbaneTimeElement.innerHTML = brisbaneTime.format(
     "h:mm:ss [<small>A</small>]"
   );
-}, 1000);
 
-//Oslo
-setInterval(function () {
+  //Oslo
   let osloElement = document.querySelector("#oslo");
   let osloDateElement = osloElement.querySelector(".date");
   let osloTimeElement = osloElement.querySelector(".time");
@@ -20,10 +18,8 @@ setInterval(function () {
 
   osloDateElement.innerHTML = osloTime.format("MMMM Do YYYY");
   osloTimeElement.innerHTML = osloTime.format("h:mm:ss [<small>A</small>]");
-}, 1000);
 
-//Prague
-setInterval(function () {
+  //Prague
   let pragueElement = document.querySelector("#prague");
   let pragueDateElement = pragueElement.querySelector(".date");
   let pragueTimeElement = pragueElement.querySelector(".time");
@@ -31,10 +27,8 @@ setInterval(function () {
 
   pragueDateElement.innerHTML = pragueTime.format("MMMM Do YYYY");
   pragueTimeElement.innerHTML = pragueTime.format("h:mm:ss [<small>A</small>]");
-}, 1000);
 
-//Paris
-setInterval(function () {
+  //Paris
   let parisElement = document.querySelector("#paris");
   let parisDateElement = parisElement.querySelector(".date");
   let parisTimeElement = parisElement.querySelector(".time");
@@ -42,4 +36,25 @@ setInterval(function () {
 
   parisDateElement.innerHTML = parisTime.format("MMMM Do YYYY");
   parisTimeElement.innerHTML = parisTime.format("h:mm:ss [<small>A</small>]");
-}, 1000);
+}
+updateTime();
+setInterval(updateTime, 1000);
+
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
+  let cityName = cityTimeZone.split("/")[1];
+  let cityTime = moment().tz(cityTimeZone);
+  let citiesElement = document.querySelector("#cities");
+  citiesElement.innerHTML = cityTimeZone;
+  citiesElement = ` <div class="city">
+  <div>
+  <h2> ${cityTimeZone}</h2>
+  <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
+  </div>
+  <div class="time"></div>
+  </div>
+  `;
+}
+
+let citiesSelectElement = document.querySelector("#city");
+citiesSelectElement.addEventListener("change", updateCity);
