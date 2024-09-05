@@ -7,7 +7,7 @@ function updateTime() {
 
   brisbaneDateElement.innerHTML = brisbaneTime.format("MMMM Do YYYY");
   brisbaneTimeElement.innerHTML = brisbaneTime.format(
-    "h:mm:ss [<small>A</small>]"
+    "h:mm:ss [<small>]A[</small>]"
   );
 
   //Oslo
@@ -17,7 +17,7 @@ function updateTime() {
   let osloTime = moment().tz("Europe/Oslo");
 
   osloDateElement.innerHTML = osloTime.format("MMMM Do YYYY");
-  osloTimeElement.innerHTML = osloTime.format("h:mm:ss [<small>A</small>]");
+  osloTimeElement.innerHTML = osloTime.format("h:mm:ss [<small>]A[</small>]");
 
   //Prague
   let pragueElement = document.querySelector("#prague");
@@ -26,7 +26,9 @@ function updateTime() {
   let pragueTime = moment().tz("Europe/Prague");
 
   pragueDateElement.innerHTML = pragueTime.format("MMMM Do YYYY");
-  pragueTimeElement.innerHTML = pragueTime.format("h:mm:ss [<small>A</small>]");
+  pragueTimeElement.innerHTML = pragueTime.format(
+    "h:mm:ss [<small>]A[</small>]"
+  );
 
   //Paris
   let parisElement = document.querySelector("#paris");
@@ -35,23 +37,24 @@ function updateTime() {
   let parisTime = moment().tz("Europe/Paris");
 
   parisDateElement.innerHTML = parisTime.format("MMMM Do YYYY");
-  parisTimeElement.innerHTML = parisTime.format("h:mm:ss [<small>A</small>]");
+  parisTimeElement.innerHTML = parisTime.format("h:mm:ss [<small>]A[</small>]");
 }
 updateTime();
 setInterval(updateTime, 1000);
 
 function updateCity(event) {
   let cityTimeZone = event.target.value;
-  let cityName = cityTimeZone.split("/")[1];
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
-  citiesElement.innerHTML = cityTimeZone;
-  citiesElement = ` <div class="city">
+  citiesElement.innerHTML = ` <div class="city">
   <div>
-  <h2> ${cityTimeZone}</h2>
+  <h2> ${cityName}</h2>
   <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
   </div>
-  <div class="time"></div>
+  <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format(
+    "A"
+  )}</small></div>
   </div>
   `;
 }
