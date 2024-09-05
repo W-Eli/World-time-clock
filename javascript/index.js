@@ -30,14 +30,16 @@ function updateTime() {
     "h:mm:ss [<small>]A[</small>]"
   );
 
-  //Paris
-  let parisElement = document.querySelector("#paris");
-  let parisDateElement = parisElement.querySelector(".date");
-  let parisTimeElement = parisElement.querySelector(".time");
-  let parisTime = moment().tz("Europe/Paris");
+  //phoenix
+  let phoenixElement = document.querySelector("#phoenix");
+  let phoenixDateElement = phoenixElement.querySelector(".date");
+  let phoenixTimeElement = phoenixElement.querySelector(".time");
+  let phoenixTime = moment().tz("America/phoenix");
 
-  parisDateElement.innerHTML = parisTime.format("MMMM Do YYYY");
-  parisTimeElement.innerHTML = parisTime.format("h:mm:ss [<small>]A[</small>]");
+  phoenixDateElement.innerHTML = phoenixTime.format("MMMM Do YYYY");
+  phoenixTimeElement.innerHTML = phoenixTime.format(
+    "h:mm:ss [<small>]A[</small>]"
+  );
 }
 updateTime();
 setInterval(updateTime, 1000);
